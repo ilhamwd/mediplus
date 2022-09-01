@@ -5,9 +5,9 @@ import 'package:mediplus/system/models/news.dart';
 class NewsRepository extends Repository {
   NewsRepository(super.api);
 
-  Future<News> getNews(Map<String, dynamic> params) => api.request<News>(
+  Future<AllNews> getNews(Map<String, dynamic> params) => api.request<AllNews>(
       endpoint: "everything",
-      model: News(),
+      model: AllNews(),
       params: params,
       method: RequestMethod.get);
 }

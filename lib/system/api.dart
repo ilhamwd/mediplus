@@ -6,12 +6,20 @@ import 'package:mediplus/components/inherited_api.dart';
 import 'package:mediplus/system/classes/model.dart';
 import 'package:mediplus/system/config.dart';
 import 'package:mediplus/system/enum/request_method.dart';
+import 'package:mediplus/system/repository/news.dart';
 
 class Api {
   late BuildContext sharedContext;
 
+  // Repositories
+  late NewsRepository news;
+
   static Api of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<InheritedApi>()!.api;
+
+  Api() {
+    news = NewsRepository(this);
+  }
 
   Future<T> request<T extends Model>({
     required String endpoint,
@@ -40,6 +48,8 @@ class Api {
 
       return model..fromJson(data);
     } catch (e) {
+      final er = e as Error;
+      print(er.stackTrace);
       ScaffoldMessenger.of(sharedContext).showSnackBar(const SnackBar(
           content: Text("Something went wrong. Please try again later")));
     }

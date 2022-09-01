@@ -15,7 +15,8 @@ class AllNews extends Model {
 
 // Singular news
 class News extends Model {
-  late String author, title, description, url, urlToImg, content;
+  late String title, url, content;
+  late String? author, urlToImage, description;
   late DateTime publicationDate;
   late NewsSource source;
 
@@ -26,7 +27,7 @@ class News extends Model {
     title = data['title'];
     description = data['description'];
     url = data['url'];
-    urlToImg = data['urlToImg'];
+    urlToImage = data['urlToImage'];
     publicationDate = DateTime.parse(data['publishedAt']);
     content = data['content'];
   }
